@@ -8,3 +8,10 @@ star
 class
 flat
 age
+formation
+cluster
+spatial
+cloud
+molecular
+surface
+density

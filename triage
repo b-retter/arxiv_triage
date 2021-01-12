@@ -1,0 +1,5 @@
+#!/bin/bash
+
+pbpaste > /Users/brendanretter/Documents/Triage_ArXiv/arxiv.txt
+python /Users/brendanretter/Documents/Triage_ArXiv/triage_python.py /Users/brendanretter/Documents/Triage_ArXiv/arxiv.txt
+open /Users/brendanretter/Documents/Triage_ArXiv/sorted_email.txt

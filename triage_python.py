@@ -1,7 +1,9 @@
 ##Code to triage email
 
 import sys
+import os
 
+cpath = '/Users/brendanretter/Documents/Triage_ArXiv'
 #make each paper an object
 class paper(object):
     def __init__(self,text):
@@ -69,7 +71,7 @@ for p in papers:
     full_email+=p.text
     full_email+=sep
 
-file = open('sorted_email.txt','w+')
+file = open(os.path.join(cpath,'sorted_email.txt'),'w+')
 file.write(full_email)
 file.close()
 
