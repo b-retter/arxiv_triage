@@ -3,27 +3,19 @@
 import sys
 import os
 
-cpath = '/Users/brendanretter/Documents/Triage_ArXiv'
 #make each paper an object
 class paper(object):
+    
     def __init__(self,text):
         self.text = text
 
     def score(self,keywords):
+        #Give paper a score for each instance of a keyword in self.text
         self.val = 0
         for word in keywords:
             self.val += self.text.count(word)
         return self.val
 
-def get_arxiv_num(line):
-    ## Extract arXiv number
-    parts = line.partition(':')
-    part = parts[2].split()
-    
-    if type(part) == str:
-        arxiv_num = part
-    else:
-        arxiv_num = part[0]
     
 #need a list of keywords
 keywords = []
@@ -31,19 +23,26 @@ with open('/Users/brendanretter/Documents/Triage_ArXiv/keywords.txt','r') as fil
     for word in file:
         keywords.append(word[:-1])
 
-#intiate object list
+
+##intiate object list
 papers = []
 
-#initiate variables
-fields = ['arXiv:','Date:','Title:','Authors:','Categories:','Comments:']
+##initiate variables
+
+#cpath = location that sorted email will be saved
+cpath = '/Users/brendanretter/Documents/Triage_ArXiv'
+
 start_line = 'arXiv:'
 end_line = '\\\\ ('
 end_email = '%%%---%%%---%%%---%%%---%%%---%%%---%%%---%%%---%%%---%%%---%%%---%%%---%%%---'
 sep = '------------------------------------------------------------------------------\n'
 paper_count = 0
 
+#open argument from system (i.e. command line)
+#code is expecting .txt file containing ArXiv email
 with open(sys.argv[1]) as file:
-    #Extract papers.
+    
+    ##Extract papers.
     #Step 1. Extract preamble
     preamble = ''
     while True:
@@ -63,6 +62,7 @@ with open(sys.argv[1]) as file:
                 line = file.readline()
 
             papers.append(paper(p_text))
+
 
 papers.sort(reverse=True,key= lambda x: x.score(keywords))
 full_email = ''
